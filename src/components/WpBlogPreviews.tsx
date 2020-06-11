@@ -8,6 +8,7 @@ interface WpBlogPreviewsProperties {
 	baseUrl: string;
 	page: number;
 	size: number;
+	category?: string;
 }
 
 interface WpBlogPreviewsChildren {
@@ -19,10 +20,10 @@ const factory = create({ block })
 	.children<WpBlogPreviewsChildren>();
 
 export default factory(function WpBlogPreviews({ children, properties, middleware: { block } }) {
-	const { baseUrl, page, size } = properties();
+	const { baseUrl, page, size, category } = properties();
 	const [renderChildren] = children();
 
-	const previews = block(getBlogPreviews)(baseUrl, size, page);
+	const previews = block(getBlogPreviews)(baseUrl, size, page, category);
 
 	if (previews) {
 		return renderChildren(previews);

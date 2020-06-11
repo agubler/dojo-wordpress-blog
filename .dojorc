@@ -3,6 +3,10 @@
 		"build-time-render": {
 			"root": "app",
 			"renderer": "jsdom",
+			"paths": [{
+				"path": "search",
+				"static": false
+			}],
 			"static": true
 		},
 		"pwa": {
