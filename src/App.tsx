@@ -6,7 +6,7 @@ import has from '@dojo/framework/core/has';
 
 import WpBlogPreviews from './components/WpBlogPreviews';
 import WpBlog from './components/WpBlog';
-import { BlogPreview } from './components/wp-blog-previews.block';
+import { BlogPreview } from './blocks/wp-blog-previews.block';
 
 const factory = create({ icache });
 
@@ -203,15 +203,29 @@ export default factory(function App({ middleware: { icache } }) {
 					},
 					blog: ({ params: { slug } }) => (
 						<WpBlog slug={slug} baseUrl={baseUrl}>
-							{(blog) => {
+							{(blog, prev, next) => {
 								return (
 									<div>
 										<h2>{blog.title}</h2>
-										{/* {blog.categories.map((cat) => (
-											<Link to="category" params={{ category: `${cat.id}` }}>
-												{cat.name}
-											</Link>
-										))} */}
+										<div>
+											{blog.categories.map((cat) => (
+												<Link to="category" params={{ category: `${cat.slug}` }}>
+													{cat.name}
+												</Link>
+											))}
+										</div>
+										<div>
+											{prev && (
+												<Link to="blog" params={{ slug: prev.slug }}>{`Previous: ${
+													prev.title
+												}`}</Link>
+											)}
+											{next && (
+												<Link to="blog" params={{ slug: next.slug }}>{`Next: ${
+													next.title
+												}`}</Link>
+											)}
+										</div>
 										<div innerHTML={blog.content} />
 									</div>
 								);

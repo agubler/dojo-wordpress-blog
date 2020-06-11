@@ -13,7 +13,6 @@
 	},
 	"dependencies": {
 		"@dojo/framework": "~7.0.0",
-		"@types/parse-link-header": "^1.0.0",
 		"parse-link-header": "^1.0.1",
 		"tslib": "~1.9.1"
 	},
@@ -22,6 +21,7 @@
 		"@dojo/cli-build-app": "~7.0.0",
 		"@dojo/cli-test-intern": "~7.0.0",
 		"@types/node": "~9.6.5",
+		"@types/parse-link-header": "^1.0.0",
 		"file-system-cache": "^1.0.5",
 		"prettier": "~1.9.0",
 		"typescript": "~3.9.0"

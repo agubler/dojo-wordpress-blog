@@ -2,7 +2,8 @@ import { create } from '@dojo/framework/core/vdom';
 import { RenderResult } from '@dojo/framework/core/interfaces';
 import block from '@dojo/framework/core/middleware/block';
 
-import getBlogPreviews, { BlogPreviews } from './wp-blog-previews.block';
+import getBlogPreviews, { BlogPreviews } from '../blocks/wp-blog-previews.block';
+import getCategories from '../blocks/wp-blog-categories.block';
 
 interface WpBlogPreviewsProperties {
 	baseUrl: string;
@@ -23,9 +24,12 @@ export default factory(function WpBlogPreviews({ children, properties, middlewar
 	const { baseUrl, page, size, category } = properties();
 	const [renderChildren] = children();
 
-	const previews = block(getBlogPreviews)(baseUrl, size, page, category);
-
-	if (previews) {
-		return renderChildren(previews);
+	const categories = block(getCategories)(baseUrl);
+	if (categories) {
+		const { id } = categories.find((item) => item.slug === category) || { id: 0 };
+		const previews = block(getBlogPreviews)(baseUrl, size, page, id);
+		if (previews) {
+			return renderChildren(previews);
+		}
 	}
 });
