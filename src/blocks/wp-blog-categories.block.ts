@@ -11,7 +11,7 @@ export default async function(baseUrl: string): Promise<Category[]> {
 	let url = `${baseUrl}/wp-json/wp/v2/categories?per_page=100`;
 	const categories: any[] = [];
 	while (url) {
-		const response = await fetch(url);
+		const response = await fetch(url, { tempCache: true, cacheCategory: 'categories' });
 		url = '';
 		const link = response.headers.get('link');
 		if (link) {

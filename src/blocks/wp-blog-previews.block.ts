@@ -21,7 +21,7 @@ export default async function(baseUrl: string, size: number, page: number, categ
 	if (category) {
 		url = `${url}&categories=${category}`;
 	}
-	const response = await fetch(url);
+	const response = await fetch(url, { tempCache: true, cacheCategory: 'blog-list' });
 	const json: any[] = await response.json();
 
 	const blogPreviews = json.map<BlogPreview>((item) => ({

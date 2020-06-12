@@ -10,7 +10,10 @@ export interface Blog {
 }
 
 export default async function(baseUrl: string, slug: string): Promise<Blog | null> {
-	const response = await fetch(`${baseUrl}/wp-json/wp/v2/posts?_embed&slug=${slug}`);
+	const response = await fetch(`${baseUrl}/wp-json/wp/v2/posts?_embed&slug=${slug}`, {
+		cacheCategory: 'blog',
+		cacheId: slug
+	});
 	const [blog]: any = await response.json();
 	if (!blog) {
 		return null;

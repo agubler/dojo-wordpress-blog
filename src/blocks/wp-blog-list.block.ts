@@ -10,7 +10,7 @@ export default async function(baseUrl: string): Promise<BlogSummary[]> {
 	let url = `${baseUrl}/wp-json/wp/v2/posts?per_page=100`;
 	const results: any[] = [];
 	while (url) {
-		const response = await fetch(url);
+		const response = await fetch(url, { tempCache: true, cacheCategory: 'blog-list' });
 		url = '';
 		const link = response.headers.get('link');
 		if (link) {

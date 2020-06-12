@@ -19,6 +19,7 @@
 	"devDependencies": {
 		"@dojo/cli": "~7.0.0",
 		"@dojo/cli-build-app": "~7.0.0",
+		"@dojo/webpack-contrib": "./dojo-webpack-contrib-7.0.3.tgz",
 		"@dojo/cli-test-intern": "~7.0.0",
 		"@types/node": "~9.6.5",
 		"@types/parse-link-header": "^1.0.0",
